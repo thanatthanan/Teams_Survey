@@ -852,6 +852,10 @@
                         <option value="ฝตน.">ฝตน.</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="empEmail">อีเมลพนักงาน</label>
+                    <input type="email" id="empEmail" class="form-control" placeholder="example@ncsa.or.th">
+                </div>
 
 
                 <div class="form-group" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 15px;">
@@ -1603,8 +1607,14 @@
             if (currentStep === 1) {
                 const name = document.getElementById('empName').value.trim();
                 const dept = document.getElementById('empDept').value;
-                if (!name || !dept) {
-                    await showCustomAlert('กรุณากรอกชื่อพนักงานและเลือกสำนัก/ฝ่ายก่อนดำเนินการต่อ', 'ข้อมูลไม่ครบถ้วน', 'warning');
+                const email = document.getElementById('empEmail').value.trim();
+                if (!name || !dept || !email) {
+                    await showCustomAlert('กรุณากรอกชื่อพนักงาน เลือกสำนัก/ฝ่าย และกรอกอีเมลก่อนดำเนินการต่อ', 'ข้อมูลไม่ครบถ้วน', 'warning');
+                    return;
+                }
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    await showCustomAlert('กรุณากรอกรูปแบบอีเมลให้ถูกต้อง', 'รูปแบบอีเมลไม่ถูกต้อง', 'warning');
                     return;
                 }
             }
@@ -1717,6 +1727,7 @@
 
             const name = document.getElementById('empName').value.trim() || 'ไม่ระบุชื่อ';
             const dept = document.getElementById('empDept').value || 'ไม่ระบุฝ่าย/สำนัก';
+            const email = document.getElementById('empEmail').value.trim() || 'ไม่ระบุอีเมล';
             const note1 = document.getElementById('notesCompare').value.trim() || 'ไม่มีบันทึกความคิดเห็นเชิงเปรียบเทียบ';
             const note2 = document.getElementById('notesBarrier').value.trim() || 'ไม่มีบันทึกสิ่งที่ต้องการให้ช่วยเหลือ';
 
@@ -1850,6 +1861,7 @@
 ข้อมูลพนักงาน:
 - ชื่อ-นามสกุล: ${name}
 - สำนัก/ฝ่าย: ${dept}
+- อีเมลพนักงาน: ${email}
 - สิทธิ์การใช้งานอีเมลองค์กร: ${cloudMailStatus}
 
 พฤติกรรมเดิมและการใช้งาน LINE:
@@ -1899,6 +1911,7 @@ ${analysisReportStr}
                 const payload = {
                     name: name,
                     dept: dept,
+                    email: email,
                     emailStatus: cloudMailStatus,
                     qLineUsage: answers.qLineUsage,
                     linePain: linePainStr,
@@ -1967,6 +1980,7 @@ ${analysisReportStr}
             if (confirmed) {
                 document.getElementById('empName').value = '';
                 document.getElementById('empDept').selectedIndex = 0;
+                document.getElementById('empEmail').value = '';
                 document.getElementById('notesCompare').value = '';
                 document.getElementById('notesBarrier').value = '';
                 
