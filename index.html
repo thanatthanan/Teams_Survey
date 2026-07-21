@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MS Teams Transition Survey & Interview Form</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Import Google Fonts (Outfit & Sarabun) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* NCSA Dark Theme Variables */
+            --bg-gradient: linear-gradient(135deg, #091224 0%, #112140 100%);
+            --panel-bg: rgba(17, 33, 64, 0.75);
+            --card-bg: rgba(9, 18, 36, 0.55);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --control-bg: rgba(9, 18, 36, 0.6);
+            --accent-primary: #00a2e8; /* NCSA Cyan/Light Blue */
+            --accent-secondary: #007cc0; /* NCSA Royal Blue */
+            --success: #10b981; /* Emerald */
+            --warning: #f59e0b; /* Amber */
+            --danger: #ef4444; /* Rose */
+            --font-display: 'Outfit', 'Sarabun', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --svg-bg-circle: rgba(255, 255, 255, 0.08);
+            --active-badge-bg: rgba(0, 162, 232, 0.2);
+            --active-badge-text: #38bdf8;
+        }
+
+        :root.light-theme {
+            /* NCSA Light Theme Variables */
+            --bg-gradient: linear-gradient(135deg, #f3f7fa 0%, #dbe4ee 100%);
+            --panel-bg: rgba(255, 255, 255, 0.88);
+            --card-bg: rgba(220, 230, 242, 0.6);
+            --border-color: rgba(0, 124, 192, 0.1);
+            --text-primary: #0a1931;
+            --text-secondary: #405070;
+            --control-bg: #ffffff;
+            --accent-primary: #005691; /* NCSA Deep Royal Blue */
+            --accent-secondary: #003d66;
+            --shadow: 0 10px 30px rgba(0, 86, 145, 0.08);
+            --svg-bg-circle: rgba(0, 86, 145, 0.08);
+            --active-badge-bg: rgba(0, 86, 145, 0.15);
+            --active-badge-text: #005691;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 1.5rem 1rem;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Top Actions Bar (Theme Toggle) */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .theme-toggle-btn {
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: translateY(-1px);
+            border-color: var(--accent-primary);
+        }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            padding: 0.5rem 0 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-container {
+            max-width: 120px;
+        }
+
+        .logo-img {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--accent-primary), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Wizard Progress Bar */
+        .wizard-progress {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .progress-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-bar-bg {
+            background: rgba(255, 255, 255, 0.05);
+            height: 6px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(to right, var(--accent-primary), var(--success));
+            height: 100%;
+            width: 16%;
+            border-radius: 10px;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Glassmorphism Panel */
+        .panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.75rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            border-left: 4px solid var(--accent-primary);
+            padding-left: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--control-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(0, 162, 232, 0.2);
+        }
+
+        /* Checkbox Grid for LINE/Teams Pain Points */
+        .checkbox-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            background: var(--control-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--accent-primary);
+            background: rgba(0, 162, 232, 0.05);
+        }
+
+        .checkbox-item input {
+            margin-right: 0.75rem;
+            accent-color: var(--accent-primary);
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* Radio Options */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            background: var(--control-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .radio-item:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .radio-item input {
+            margin-right: 0.75rem;
+            accent-color: var(--accent-primary);
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* Question Cards */
+        .question-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+            transition: var(--transition);
+        }
+
+        .question-card:hover {
+            border-color: rgba(0, 162, 232, 0.4);
+        }
+
+        .question-header {
+            margin-bottom: 1rem;
+        }
+
+        .question-meta {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .question-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Score Options Grid */
+        .score-options {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .score-btn {
+            background: rgba(9, 18, 36, 0.4);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 0.25rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.05rem;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .score-btn:hover {
+            background: rgba(0, 162, 232, 0.15);
+            color: var(--text-primary);
+        }
+
+        /* Selected State */
+        .score-btn.selected {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 10px rgba(0, 162, 232, 0.3);
+        }
+
+        .score-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            padding: 0 0.25rem;
+        }
+
+        /* Device Usage Cards (Sub-options for Teams app type) */
+        .device-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .device-card {
+            background: var(--control-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .device-title {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        /* Multi-step View Manager */
+        .form-step-container {
+            display: none;
+        }
+
+        .form-step-container.active {
+            display: block;
+            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Wizard Footer Actions */
+        .wizard-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .wizard-actions.double {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* SVG Circular Progress Gauge */
+        .score-gauge-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 1.5rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg); /* Rotate to start from top center */
+        }
+
+        .score-bg-circle {
+            fill: none;
+            stroke: var(--svg-bg-circle);
+            stroke-width: 8;
+        }
+
+        .score-progress-circle {
+            fill: none;
+            stroke: var(--accent-primary);
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-dasharray: 251.2; /* 2 * PI * 40 = 251.2 */
+            stroke-dashoffset: 251.2; /* Start completely empty */
+            transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.3s;
+        }
+
+        .score-gauge-text {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .score-num {
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Results Screen Layout */
+        .results-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .results-container .badge {
+            display: inline-block;
+            padding: 0.4rem 1.25rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+        }
+
+        .badge-resistant { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+        .badge-hesitant { background: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid var(--warning); }
+        .badge-active { background: var(--active-badge-bg); color: var(--active-badge-text); border: 1px solid var(--accent-primary); }
+        .badge-champion { background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            width: 100%;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        @media (min-width: 576px) {
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .info-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.85rem 1rem;
+            border-radius: 12px;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-val {
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .recommendation-box {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            text-align: left;
+            border-left: 4px solid var(--accent-primary);
+            width: 100%;
+        }
+
+        .recommendation-title {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .recommendation-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .summary-box {
+            width: 100%;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        /* Action Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--accent-primary);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-1px);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        @media (min-width: 576px) {
+            .btn-group {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-back {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: var(--transition);
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+        }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--success);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Views management */
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Dialog Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: var(--panel-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transform: scale(0.9);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.show .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 162, 232, 0.15);
+            color: var(--accent-primary);
+        }
+        
+        .modal-icon.warning {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+
+        .modal-icon.danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .modal-message {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            white-space: pre-line;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            flex: 1;
+        }
+
+        .modal-btn-confirm {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .modal-btn-confirm:hover {
+            background: var(--accent-secondary);
+        }
+
+        .modal-btn-cancel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .modal-btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .modal-btn-danger:hover {
+            background: #dc2626;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Top Actions Bar -->
+        <div class="top-bar">
+            <button class="theme-toggle-btn" onclick="resetForm()" id="homeBtn" title="กลับไปหน้าแรก / ล้างข้อมูลทั้งหมด">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span>หน้าแรก</span>
+            </button>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">
+                <svg id="themeIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <span id="themeBtnText">โหมดสว่าง</span>
+            </button>
+        </div>
+
+        <header>
+            <div class="logo-container" style="cursor: pointer;" onclick="resetForm()" title="กลับไปหน้าแรก / เริ่มป้อนข้อมูลใหม่">
+                <img src="../logo_ncsa_png.png" class="logo-img" alt="NCSA Logo" onerror="this.src='logo_ncsa_png.png'; this.onerror=null;">
+            </div>
+            <h1>Teams User Interview & Evaluation</h1>
+            <p>แบบสัมภาษณ์การใช้งาน Microsoft Teams</p>
+        </header>
+
+        <!-- PAGE 1: INTERVIEW WIZARD VIEW -->
+        <main id="formView" class="panel view-section active">
+            
+            <!-- Step Progress Indicator -->
+            <div class="wizard-progress">
+                <div class="progress-text" id="progressText">ขั้นตอนที่ 1 จาก 6: ข้อมูลผู้ให้สัมภาษณ์</div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressBarFill"></div>
+                </div>
+            </div>
+
+            <!-- STEP 1: Personal Info -->
+            <div class="form-step-container active" id="step1">
+                <h2 class="section-title">ข้อมูลทั่วไปของผู้ให้สัมภาษณ์</h2>
+                <div class="form-group">
+                    <label for="empName">ชื่อ-นามสกุล</label>
+                    <input type="text" id="empName" class="form-control" placeholder="ระบุชื่อพนักงาน">
+                </div>
+                <div class="form-group">
+                    <label for="empDept">สำนัก/ฝ่าย</label>
+                    <select id="empDept" class="form-control">
+                        <option value="">-- เลือกสำนัก/ฝ่าย --</option>
+                        <option value="สทส.">สทส.</option>
+                        <option value="สบก.">สบก.</option>
+                        <option value="สงก.">สงก.</option>
+                        <option value="สยศ.">สยศ.</option>
+                        <option value="ศวจ.">ศวจ.</option>
+                        <option value="สบพ.">สบพ.</option>
+                        <option value="สวม.">สวม.</option>
+                        <option value="สปส.">สปส.</option>
+                        <option value="สปบ.">สปบ.</option>
+                        <option value="สกม.">สกม.</option>
+                        <option value="ฝตน.">ฝตน.</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 15px;">
+                    <label style="color: var(--text-primary); font-size: 0.95rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">ท่านมีสิทธิ์การใช้งานอีเมลองค์กรหรือไม่?</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="cloudMail" value="มีอีเมลองค์กร (@cloud.ncsa.or.th)" checked>
+                            <span>มีอีเมลองค์กร (@cloud.ncsa.or.th)</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="cloudMail" value="ไม่มี (ใช้อีเมลกลุ่มหรืออีเมลแผนกร่วมกัน)">
+                            <span>ไม่มี (ใช้อีเมลกลุ่มหรืออีเมลแผนกร่วมกัน)</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="cloudMail" value="ไม่มีอีเมลองค์กรเลย">
+                            <span>ไม่มีอีเมลองค์กรเลย</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="wizard-actions">
+                    <button class="btn" onclick="nextStep(2)">
+                        ถัดไป 
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: LINE & Background -->
+            <div class="form-step-container" id="step2">
+                <h2 class="section-title">1. ข้อมูลการใช้งาน LINE & ประสบการณ์เดิม</h2>
+                
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">การใช้งานเครื่องมือเดิม</div>
+                        <div class="question-text">ก่อนหน้านี้ ท่านมีการใช้งานแอป LINE ในการติดต่อหรือส่งงานมากน้อยเพียงใด?</div>
+                    </div>
+                    <div class="score-options" data-question="qLineUsage">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>ใช้น้อยมาก</span>
+                        <span>ใช้งานตลอดเวลา</span>
+                    </div>
+                </div>
+
+                <div class="form-group" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 15px; margin-bottom: 1.25rem;">
+                    <label style="color: var(--text-primary); font-size: 0.95rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">ปัญหาหรือข้อจำกัดที่ท่านพบบ่อยจากการใช้ LINE ในการทำงานคืออะไร? (เลือกได้หลายข้อ)</label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item" style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem; padding: 1rem;">
+                            <div style="display: flex; align-items: center; width: 100%;">
+                                <input type="checkbox" name="linePain" value="ไฟล์หรือรูปภาพหมดอายุ ดาวน์โหลดไม่ได้">
+                                <span style="font-weight: 600;">ไฟล์/รูปภาพหมดอายุ ดาวน์โหลดไม่ได้</span>
+                            </div>
+                            <span style="font-size: 0.8rem; color: var(--text-secondary); margin-left: 28px;">(เช่น ส่งไฟล์หรือรูปงานทิ้งไว้เกิน 1-2 สัปดาห์ แล้วกลับมาเปิดดูย้อนหลังหรือเซฟลงเครื่องคอมพิวเตอร์ไม่ได้อีก)</span>
+                        </label>
+                        <label class="checkbox-item" style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem; padding: 1rem;">
+                            <div style="display: flex; align-items: center; width: 100%;">
+                                <input type="checkbox" name="linePain" value="แชทคุยงานและเรื่องส่วนตัวปนกันจนสับสน">
+                                <span style="font-weight: 600;">แชทงานและแชทส่วนตัวปนกัน</span>
+                            </div>
+                            <span style="font-size: 0.8rem; color: var(--text-secondary); margin-left: 28px;">(แยกแชทครอบครัว/เพื่อนฝูงออกจากงานยาก มีข้อความคุยเล่นทั่วไปหรือโฆษณาปนเปกับคำสั่งงานราชการสำคัญ)</span>
+                        </label>
+                        <label class="checkbox-item" style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem; padding: 1rem;">
+                            <div style="display: flex; align-items: center; width: 100%;">
+                                <input type="checkbox" name="linePain" value="ค้นหาไฟล์งานย้อนหลังหรือข้อความเก่าได้ยาก">
+                                <span style="font-weight: 600;">ค้นหาไฟล์หรือข้อความเก่าย้อนหลังยาก</span>
+                            </div>
+                            <span style="font-size: 0.8rem; color: var(--text-secondary); margin-left: 28px;">(พิมพ์ค้นหาคีย์เวิร์ดคำสำคัญในช่องค้นหาแล้วไม่เจอไฟล์ หรือกรณีมีคนดึงพนักงานใหม่เข้ากลุ่มจะไม่เห็นไฟล์งานย้อนหลัง)</span>
+                        </label>
+                        <label class="checkbox-item" style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem; padding: 1rem;">
+                            <div style="display: flex; align-items: center; width: 100%;">
+                                <input type="checkbox" name="linePain" value="ข้อความสำคัญถูกดันหายไปจากหน้าแชทรวม">
+                                <span style="font-weight: 600;">ข้อความสำคัญถูกดันตกหล่นหาย</span>
+                            </div>
+                            <span style="font-size: 0.8rem; color: var(--text-secondary); margin-left: 28px;">(เมื่อคนในกลุ่มมีการพิมพ์พูดคุยตอบโต้กันเยอะๆ ทำให้หัวข้อสั่งงานหรือลิงก์ส่งงานสำคัญเลื่อนขึ้นจอไปจนลืมสังเกต)</span>
+                        </label>
+                        <label class="checkbox-item" style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem; padding: 1rem;">
+                            <div style="display: flex; align-items: center; width: 100%;">
+                                <input type="checkbox" name="linePain" value="ไม่มีระบบแยกคุยตอบกลับรายเรื่อง (คุยงานหลายเรื่องปนกันในห้องแชทเดียว)">
+                                <span style="font-weight: 600;">แยกตอบรายเรื่องไม่ได้ (คุยงานหลายเรื่องปนกัน)</span>
+                            </div>
+                            <span style="font-size: 0.8rem; color: var(--text-secondary); margin-left: 28px;">(พิมพ์ตอบสลับไปมาในห้องแชทหลักหน้าเดียวพร้อมๆ กันเมื่อคุยหลายหัวข้องาน ทำให้คนในกลุ่มเกิดความสับสนทางข้อมูล)</span>
+                        </label>
+                        <label class="checkbox-item" style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem; padding: 1rem;">
+                            <div style="display: flex; align-items: center; width: 100%;">
+                                <input type="checkbox" name="linePain" value="กังวลเรื่องความปลอดภัยและความลับของข้อมูลองค์กร">
+                                <span style="font-weight: 600;">ความปลอดภัยข้อมูลองค์กรรั่วไหล</span>
+                            </div>
+                            <span style="font-size: 0.8rem; color: var(--text-secondary); margin-left: 28px;">(เนื่องจากเป็นแอปแชทส่วนตัวที่เชิญคนนอกได้ง่าย ทำให้ส่งผลกระทบกรณีเผลอส่งไฟล์ความลับของราชการออกไปสู่ภายนอก)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 15px; margin-bottom: 1.25rem;">
+                    <label style="color: var(--text-primary); font-size: 0.95rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">ท่านเคยมีประสบการณ์การใช้งาน Microsoft Teams มาก่อนหรือไม่?</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="teamsExp" value="ไม่เคยใช้เลย" checked>
+                            <span>ไม่เคยใช้เลย</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="teamsExp" value="เคยใช้เข้าประชุมออนไลน์อย่างเดียว (Meeting)">
+                            <span>เคยใช้เข้าประชุมออนไลน์อย่างเดียว (Meeting)</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="teamsExp" value="เคยใช้งานพิมพ์แชทสื่อสารระดับเบื้องต้น">
+                            <span>เคยใช้งานพิมพ์แชทสื่อสารระดับเบื้องต้น</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="teamsExp" value="เคยใช้งานประสานงาน ส่งงาน และแชร์ไฟล์งานร่วมกันในแผนก">
+                            <span>เคยใช้งานประสานงาน ส่งงาน และแชร์ไฟล์งานร่วมกันในแผนก</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="teamsExp" value="ใช้งานอย่างคล่องแคล่วและจัดระเบียบงานได้ครบถ้วน">
+                            <span>ใช้งานอย่างคล่องแคล่วและจัดการระบบทีมได้</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="wizard-actions double">
+                    <button class="btn btn-secondary" onclick="prevStep(1)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        ย้อนกลับ
+                    </button>
+                    <button class="btn" onclick="nextStep(3)">
+                        ถัดไป 
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 3: Teams Post-Training & Teams Pain Points -->
+            <div class="form-step-container" id="step3">
+                <h2 class="section-title">2. การเข้าใช้งาน Microsoft Teams และปัญหาที่พบบ่อย</h2>
+                
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">ความถี่การใช้งาน (Teams Post-Training)</div>
+                        <div class="question-text">หลังจากอบรมไปแล้ว ท่านมีการเข้าใช้งาน Microsoft Teams บ้างหรือไม่ ในภาพรวม?</div>
+                    </div>
+                    <div class="score-options" data-question="qTeamsPostUsage">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>ไม่เคยใช้เลย</span>
+                        <span>ใช้ทุกวันทำงาน</span>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">ช่องทางการใช้งาน (Access Channels)</div>
+                        <div class="question-text">ความถี่ในการเข้าใช้งาน Microsoft Teams แยกตามอุปกรณ์ต่างๆ:</div>
+                    </div>
+                    
+                    <div class="device-grid">
+                        <div class="device-card">
+                            <div class="device-title">Web Browser</div>
+                            <div class="score-options" data-question="qDeviceWeb">
+                                <div class="score-btn" data-value="1">1</div>
+                                <div class="score-btn" data-value="2">2</div>
+                                <div class="score-btn" data-value="3">3</div>
+                                <div class="score-btn" data-value="4">4</div>
+                                <div class="score-btn" data-value="5">5</div>
+                            </div>
+                            <span style="font-size: 0.7rem; color: var(--text-secondary);">1 = ไม่เคยใช้ | 5 = ทุกวัน</span>
+                        </div>
+
+                        <div class="device-card">
+                            <div class="device-title">Teams Desktop App</div>
+                            <div class="score-options" data-question="qDeviceDesktop">
+                                <div class="score-btn" data-value="1">1</div>
+                                <div class="score-btn" data-value="2">2</div>
+                                <div class="score-btn" data-value="3">3</div>
+                                <div class="score-btn" data-value="4">4</div>
+                                <div class="score-btn" data-value="5">5</div>
+                            </div>
+                            <span style="font-size: 0.7rem; color: var(--text-secondary);">1 = ไม่เคยใช้ | 5 = ทุกวัน</span>
+                        </div>
+
+                        <div class="device-card">
+                            <div class="device-title">Mobile App</div>
+                            <div class="score-options" data-question="qDeviceMobile">
+                                <div class="score-btn" data-value="1">1</div>
+                                <div class="score-btn" data-value="2">2</div>
+                                <div class="score-btn" data-value="3">3</div>
+                                <div class="score-btn" data-value="4">4</div>
+                                <div class="score-btn" data-value="5">5</div>
+                            </div>
+                            <span style="font-size: 0.7rem; color: var(--text-secondary);">1 = ไม่เคยใช้ | 5 = ทุกวัน</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 15px; margin-top: 1.25rem;">
+                    <label style="color: var(--text-primary); font-size: 0.95rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">ท่านมีอุปสรรคหรือความยากลำบากในการล็อกอิน (Login) เข้าใช้งานระบบหรือไม่?</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="loginPain" value="ไม่เคยพบปัญหา ล็อกอินเข้าใช้งานได้ราบรื่นดี" checked>
+                            <span>ไม่พบปัญหา ล็อกอินใช้งานได้ราบรื่น</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="loginPain" value="พบปัญหาบางครั้ง เช่น ลืมรหัสผ่าน หรือหน้าต่างค้าง">
+                            <span>พบปัญหาบางครั้ง (ลืมรหัสผ่าน)</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="loginPain" value="พบปัญหาบ่อยมาก เช่น ติดขัดระบบรักษาความปลอดภัย MFA หรือจำรหัสไม่ได้เลย">
+                            <span>พบปัญหาบ่อยมาก (ติด MFA/เข้าไม่ได้เลย)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 15px; margin-top: 1.25rem;">
+                    <label style="color: var(--text-primary); font-size: 0.95rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">ปัญหาหรืออุปสรรคที่ท่านพบจากการใช้งาน Microsoft Teams คืออะไร? (เลือกได้หลายข้อ)</label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="teamsPain" value="แอปพลิเคชันโหลดช้า หน่วงเครื่อง หรือกินทรัพยากรคอมพิวเตอร์สูง">
+                            <span>แอปช้า หน่วงเครื่อง กินสเปกคอมฯ</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="teamsPain" value="หน้าต่างเมนูและระบบห้องแชทใช้งานยาก หาเครื่องมือไม่เจอ">
+                            <span>เมนูใช้งานยาก/สับสน หาเครื่องมือยาก</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="teamsPain" value="การแจ้งเตือนไม่ทำงาน หรือแจ้งเตือนดีเลย์บนโทรศัพท์มือถือ">
+                            <span>แจ้งเตือนไม่เด้ง แจ้งเตือนดีเลย์</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="teamsPain" value="โทรประชุมออนไลน์แล้วภาพหรือเสียงกระตุก สัญญาณหลุดบ่อย">
+                            <span>โทรประชุมกระตุก สัญญาณไม่เสถียร</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="teamsPain" value="การแชร์ลิงก์ส่งงาน การอัปโหลดไฟล์ หรือการแก้ไขไฟล์ร่วมกันสับสน">
+                            <span>อัปโหลดแชร์ไฟล์/แก้ร่วมกันค่อนข้างสับสน</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="wizard-actions double">
+                    <button class="btn btn-secondary" onclick="prevStep(2)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        ย้อนกลับ
+                    </button>
+                    <button class="btn" onclick="nextStep(4)">
+                        ถัดไป 
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 4: Teams Features Usage -->
+            <div class="form-step-container" id="step4">
+                <h2 class="section-title">3. แบบสำรวจระดับการใช้งานแต่ละฟีเจอร์ของ Microsoft Teams</h2>
+                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: -0.75rem; margin-bottom: 1.25rem;">ระบุความบ่อยในการใช้งานเครื่องมือย่อยภายในระบบ Microsoft Teams:</p>
+
+                <!-- Feature 1: Chat 1-1 -->
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">ฟีเจอร์ที่ 1: Chat 1-1</div>
+                        <div class="question-text">การใช้งานแชทคุยแบบตัวต่อตัว (คุยเรื่องงานส่วนตัว/ทักรายบุคคล)?</div>
+                    </div>
+                    <div class="score-options" data-question="qFeatChat11">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>ไม่เคยใช้เลย</span>
+                        <span>ใช้เป็นประจำทุกวัน</span>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Group Chat -->
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">ฟีเจอร์ที่ 2: Group Chat</div>
+                        <div class="question-text">การใช้งานแชทคุยกลุ่มย่อยเฉพาะกิจ (สร้างห้องคุยงานตามโปรเจกต์สั้นๆ)?</div>
+                    </div>
+                    <div class="score-options" data-question="qFeatGroupChat">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>ไม่เคยใช้เลย</span>
+                        <span>ใช้เป็นประจำทุกวัน</span>
+                    </div>
+                </div>
+
+                <!-- Feature 3: Channel Post/Reply -->
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">ฟีเจอร์ที่ 3: Post & Reply Threads</div>
+                        <div class="question-text">การสื่อสารใน Channel ใหญ่แบบคุยงานส่วนรวมแยกตามหัวข้อ (Post และ Reply Thread)?</div>
+                    </div>
+                    <div class="score-options" data-question="qFeatChannelPost">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>ไม่เคยใช้เลย</span>
+                        <span>ใช้เป็นประจำทุกวัน</span>
+                    </div>
+                </div>
+
+                <!-- Feature 4: Calendar -->
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">ฟีเจอร์ที่ 4: Calendar & Meetings</div>
+                        <div class="question-text">การใช้งานปฏิทินของ Teams เพื่อทำการนัดหมาย, ดูตารางงาน หรือจัดประชุมออนไลน์?</div>
+                    </div>
+                    <div class="score-options" data-question="qFeatCalendar">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>ไม่เคยใช้เลย</span>
+                        <span>ใช้เป็นประจำทุกวัน</span>
+                    </div>
+                </div>
+
+                <!-- Feature 5: OneDrive/Files -->
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">ฟีเจอร์ที่ 5: OneDrive & Files Manager</div>
+                        <div class="question-text">การจัดเก็บไฟล์งาน การแชร์โฟลเดอร์ และเรียกดูคลังไฟล์เอกสารในระบบ Microsoft Teams?</div>
+                    </div>
+                    <div class="score-options" data-question="qFeatFiles">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>ไม่เคยใช้เลย</span>
+                        <span>ใช้เป็นประจำทุกวัน</span>
+                    </div>
+                </div>
+
+                <div class="wizard-actions double">
+                    <button class="btn btn-secondary" onclick="prevStep(3)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        ย้อนกลับ
+                    </button>
+                    <button class="btn" onclick="nextStep(5)">
+                        ถัดไป 
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 5: Transition Quality Q1-Q7 -->
+            <div class="form-step-container" id="step5">
+                <h2 class="section-title">4. ประเมินการปรับใช้และสลับเครื่องมือ</h2>
+
+                <!-- Q1 -->
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">ข้อ 1 (Tool Migration)</div>
+                        <div class="question-text">1. การย้ายงานหรือส่งงานที่เคยใช้ LINE มาใช้ Microsoft Teams บ่อยขึ้นเพียงใด?</div>
+                    </div>
+                    <div class="score-options" data-question="q1">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>LINE 100%</span>
+                        <span>Teams เกือบ 100%</span>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">ข้อ 2 (Proficiency)</div>
+                        <div class="question-text">2. ความเข้าใจการใช้ Channel, การตอบแบบแยกหัวข้อ (Reply Thread)?</div>
+                    </div>
+                    <div class="score-options" data-question="q3">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>ยังทำไม่เป็น</span>
+                        <span>ใช้งานคล่องแคล่ว</span>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">ข้อ 3 (Co-authoring)</div>
+                        <div class="question-text">3. อัตราการเข้าแก้ไขไฟล์ร่วมกันผ่าน Word/Excel/PPT ใน Microsoft Teams?</div>
+                    </div>
+                    <div class="score-options" data-question="q4">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>ไม่เคยใช้เลย</span>
+                        <span>ใช้ตรวจงานหลัก</span>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">ข้อ 4 (Security Mindset)</div>
+                        <div class="question-text">4. ความตระหนักในการแยกพื้นที่คุยงานออกจากเรื่องส่วนตัวเพื่อความปลอดภัย?</div>
+                    </div>
+                    <div class="score-options" data-question="q5">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>ไม่เห็นด้วย</span>
+                        <span>เห็นด้วยอย่างยิ่ง</span>
+                    </div>
+                </div>
+
+                <!-- Q7 (Security & Link Sharing permissions) -->
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">ข้อ 5 (Link Sharing Security)</div>
+                        <div class="question-text">5. เมื่อต้องส่งแชร์ลิงก์ไฟล์งาน ท่านมีการตรวจสอบและกำหนดสิทธิ์ผู้เข้าถึงก่อนส่งเสมอหรือไม่?</div>
+                    </div>
+                    <div class="score-options" data-question="q7">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>ไม่เคยระบุ/ส่งตรงเลย</span>
+                        <span>ตั้งและเช็คสิทธิ์ทุกครั้ง</span>
+                    </div>
+                </div>
+
+                <div class="wizard-actions double">
+                    <button class="btn btn-secondary" onclick="prevStep(4)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        ย้อนกลับ
+                    </button>
+                    <button class="btn" onclick="nextStep(6)">
+                        ถัดไป 
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 6: Open ended notes & Weekly Stats -->
+            <div class="form-step-container" id="step6">
+                <h2 class="section-title">5. สถิติการใช้งาน & ความคิดเห็นเชิงลึก</h2>
+                
+
+
+                <div class="form-group">
+                    <label for="notesCompare">เปรียบเทียบการแชร์ไฟล์/คุยงานใน LINE vs Microsoft Teams ข้อดีข้อเสียที่เห็นชัดเจน</label>
+                    <textarea id="notesCompare" class="form-control" rows="4" placeholder="ระบุความคิดเห็นเปรียบเทียบเชิงลึก..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notesBarrier">สิ่งแรกที่อยากให้องค์กรช่วยเหลือเพื่อให้เปลี่ยนมาใช้งาน Microsoft Teams ได้ราบรื่นขึ้น</label>
+                    <textarea id="notesBarrier" class="form-control" rows="4" placeholder="ระบุปัจจัยสนับสนุนที่ต้องการ..."></textarea>
+                </div>
+
+                <div class="wizard-actions double">
+                    <button class="btn btn-secondary" onclick="prevStep(5)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        ย้อนกลับ
+                    </button>
+                    <button class="btn" onclick="saveAndGoToResults()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                        บันทึก & คำนวณผล
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- PAGE 2: EVALUATION RESULTS VIEW -->
+        <main id="resultView" class="panel view-section">
+            <div class="results-container">
+                <h2 class="section-title" style="border: none; padding: 0; margin-bottom: 0.5rem;">ผลการวิเคราะห์การใช้งาน Microsoft Teams</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">สถิติวิเคราะห์ระดับความร่วมมือของพนักงานในการเปลี่ยนย้ายแพลตฟอร์ม</p>
+
+                <!-- SVG Circular Progress Gauge -->
+                <div class="score-gauge-container">
+                    <svg class="score-svg" viewBox="0 0 100 100">
+                        <circle class="score-bg-circle" cx="50" cy="50" r="40" />
+                        <circle class="score-progress-circle" id="scoreCircle" cx="50" cy="50" r="40" />
+                    </svg>
+                    <div class="score-gauge-text">
+                        <div class="score-num" id="scoreText">0%</div>
+                        <div class="score-label" id="scoreSubtext">0 / 80 คะแนน</div>
+                    </div>
+                </div>
+
+                <!-- Category Badge -->
+                <div>
+                    <span id="groupBadge" class="badge badge-resistant">Resistant</span>
+                </div>
+
+                <!-- Info Grid -->
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">ผู้รับการสัมภาษณ์</div>
+                        <div class="info-val" id="resName">คุณสมศักดิ์ รักเรียน</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">สังกัดสำนัก/ฝ่าย</div>
+                        <div class="info-val" id="resDept">ฝตน.</div>
+                    </div>
+                </div>
+
+
+
+                <!-- Recommendation Box -->
+                <div class="recommendation-box">
+                    <div class="recommendation-title" id="recTitle">ระดับความพร้อมเริ่มต้น (Resistant)</div>
+                    <div class="recommendation-text" id="recText">กรุณาเลือกตอบแบบประเมินให้ครบถ้วนเพื่อวิเคราะห์ระดับความร่วมมือของพนักงานในการเปลี่ยนย้ายแพลตฟอร์ม</div>
+                </div>
+
+                <!-- Summary Raw Text for copy -->
+                <div class="summary-box">
+                    <label for="rawSummary" class="info-label" style="display: block; margin-bottom: 0.5rem;">รายละเอียดสรุปสำหรับคัดลอก (รายงานผล)</label>
+                    <textarea id="rawSummary" class="form-control" rows="12" readonly style="font-family: monospace; font-size: 0.8rem; background: rgba(15, 23, 42, 0.8); color: #cbd5e1; line-height: 1.4;"></textarea>
+                </div>
+
+                <!-- Actions Grid -->
+                <div class="btn-group">
+                    <button class="btn" onclick="copyReport()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        คัดลอกรายงานสรุป
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                        พิมพ์ / บันทึก PDF
+                    </button>
+                    <button class="btn btn-secondary" onclick="resetForm()" style="grid-column: 1 / -1; margin-top: 0.25rem; border-color: rgba(239, 68, 68, 0.4); color: var(--danger); background: rgba(239, 68, 68, 0.05);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
+                        กลับไปป้อนข้อมูลใหม่ (ล้างค่าทั้งหมด)
+                    </button>
+                </div>
+
+                <!-- Back button to return to editing -->
+                <button class="btn-back" onclick="goToForm()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    ย้อนกลับไปแก้ไขข้อคำถาม
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <div class="toast" id="toast">คัดลอกข้อมูลสรุปไปยัง Clipboard แล้ว!</div>
+
+    <script>
+        // Custom Dialog Modal Functions
+        function showCustomAlert(message, title = "แจ้งเตือน", type = "warning") {
+            return new Promise((resolve) => {
+                let overlay = document.getElementById('customAlertModal');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.id = 'customAlertModal';
+                    overlay.className = 'modal-overlay';
+                    document.body.appendChild(overlay);
+                }
+                
+                let iconHtml = '';
+                if (type === 'warning') {
+                    iconHtml = `<div class="modal-icon warning"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>`;
+                } else if (type === 'danger') {
+                    iconHtml = `<div class="modal-icon danger"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></div>`;
+                } else {
+                    iconHtml = `<div class="modal-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></div>`;
+                }
+
+                overlay.innerHTML = `
+                    <div class="modal-box">
+                        ${iconHtml}
+                        <div class="modal-title">${title}</div>
+                        <div class="modal-message">${message}</div>
+                        <div class="modal-buttons">
+                            <button class="modal-btn modal-btn-confirm" id="alertOkBtn">ตกลง</button>
+                        </div>
+                    </div>
+                `;
+
+                // Force layout reflow before adding 'show' class to trigger animation
+                overlay.offsetHeight; 
+                overlay.classList.add('show');
+                
+                const okBtn = overlay.querySelector('#alertOkBtn');
+                const closeHandler = () => {
+                    overlay.classList.remove('show');
+                    resolve();
+                };
+                okBtn.addEventListener('click', closeHandler, { once: true });
+            });
+        }
+
+        function showCustomConfirm(message, title = "ยืนยันการทำรายการ", type = "warning", confirmText = "ตกลง", cancelText = "ยกเลิก") {
+            return new Promise((resolve) => {
+                let overlay = document.getElementById('customConfirmModal');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.id = 'customConfirmModal';
+                    overlay.className = 'modal-overlay';
+                    document.body.appendChild(overlay);
+                }
+
+                let iconHtml = '';
+                let confirmBtnClass = 'modal-btn-confirm';
+                if (type === 'danger') {
+                    iconHtml = `<div class="modal-icon danger"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>`;
+                    confirmBtnClass = 'modal-btn-danger';
+                } else {
+                    iconHtml = `<div class="modal-icon warning"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></div>`;
+                }
+
+                overlay.innerHTML = `
+                    <div class="modal-box">
+                        ${iconHtml}
+                        <div class="modal-title">${title}</div>
+                        <div class="modal-message">${message}</div>
+                        <div class="modal-buttons">
+                            <button class="modal-btn modal-btn-cancel" id="confirmCancelBtn">${cancelText}</button>
+                            <button class="modal-btn ${confirmBtnClass}" id="confirmOkBtn">${confirmText}</button>
+                        </div>
+                    </div>
+                `;
+
+                // Force layout reflow before adding 'show' class to trigger animation
+                overlay.offsetHeight;
+                overlay.classList.add('show');
+
+                const okBtn = overlay.querySelector('#confirmOkBtn');
+                const cancelBtn = overlay.querySelector('#confirmCancelBtn');
+
+                const handleOk = () => {
+                    overlay.classList.remove('show');
+                    resolve(true);
+                };
+
+                const handleCancel = () => {
+                    overlay.classList.remove('show');
+                    resolve(false);
+                };
+
+                okBtn.addEventListener('click', handleOk, { once: true });
+                cancelBtn.addEventListener('click', handleCancel, { once: true });
+            });
+        }
+
+        let currentStep = 1;
+        const totalSteps = 6;
+
+        // Store answers
+        const answers = {
+            qLineUsage: 0,
+            qTeamsPostUsage: 0,
+            qDeviceWeb: 0,
+            qDeviceDesktop: 0,
+            qDeviceMobile: 0,
+            // New feature-specific usage questions
+            qFeatChat11: 0,
+            qFeatGroupChat: 0,
+            qFeatChannelPost: 0,
+            qFeatCalendar: 0,
+            qFeatFiles: 0,
+            // Transition Quality
+            q1: 0,
+            q3: 0,
+            q4: 0,
+            q5: 0,
+            q7: 0
+        };
+
+        const stepTitles = {
+            1: "ข้อมูลทั่วไปของผู้ให้สัมภาษณ์",
+            2: "ข้อมูลการใช้งาน LINE & ประสบการณ์เดิม",
+            3: "การเข้าใช้งาน Teams และปัญหาที่พบบ่อย",
+            4: "แบบสำรวจระดับการใช้งานฟีเจอร์ย่อย",
+            5: "ประเมินการปรับใช้และสลับเครื่องมือ",
+            6: "ความคิดเห็นเชิงลึกและส่งประเมิน"
+        };
+
+        // Set up interactive buttons
+        document.querySelectorAll('.score-options').forEach(group => {
+            const questionId = group.getAttribute('data-question');
+            group.querySelectorAll('.score-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    group.querySelectorAll('.score-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    answers[questionId] = parseInt(btn.getAttribute('data-value'));
+                });
+            });
+        });
+
+        // Wizard navigation logic
+        function updateWizardUI() {
+            // Hide all steps
+            document.querySelectorAll('.form-step-container').forEach(step => {
+                step.classList.remove('active');
+            });
+            // Show current step
+            document.getElementById(`step${currentStep}`).classList.add('active');
+
+            // Update Progress Bar
+            const percent = (currentStep / totalSteps) * 100;
+            document.getElementById('progressBarFill').style.width = `${percent}%`;
+            document.getElementById('progressText').innerText = `ขั้นตอนที่ ${currentStep} จาก ${totalSteps}: ${stepTitles[currentStep]}`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        async function nextStep(step) {
+            // Validate step 1 fields before proceeding
+            if (currentStep === 1) {
+                const name = document.getElementById('empName').value.trim();
+                const dept = document.getElementById('empDept').value;
+                if (!name || !dept) {
+                    await showCustomAlert('กรุณากรอกชื่อพนักงานและเลือกสำนัก/ฝ่ายก่อนดำเนินการต่อ', 'ข้อมูลไม่ครบถ้วน', 'warning');
+                    return;
+                }
+            }
+
+            // Validate step 2 answers before proceeding
+            if (currentStep === 2) {
+                if (answers.qLineUsage === 0) {
+                    await showCustomAlert('กรุณาเลือกประเมินความบ่อยของการใช้งานแอป LINE ก่อนหน้า', 'ตอบไม่ครบข้อ', 'warning');
+                    return;
+                }
+            }
+
+            // Validate step 3 answers before proceeding
+            if (currentStep === 3) {
+                if (answers.qTeamsPostUsage === 0 || answers.qDeviceWeb === 0 || answers.qDeviceDesktop === 0 || answers.qDeviceMobile === 0) {
+                    await showCustomAlert('กรุณาตอบคำถามการใช้งาน Microsoft Teams และช่องทางการเข้าถึง (Web, Desktop, Mobile) ให้ครบถ้วน', 'ตอบไม่ครบข้อ', 'warning');
+                    return;
+                }
+            }
+
+            // Validate step 4 Teams feature usage
+            if (currentStep === 4) {
+                const featQs = ['qFeatChat11', 'qFeatGroupChat', 'qFeatChannelPost', 'qFeatCalendar', 'qFeatFiles'];
+                let missing = [];
+                const featNames = ["Chat 1-1", "Group Chat", "Post/Reply", "Calendar", "OneDrive/Files"];
+                featQs.forEach((q, i) => {
+                    if (answers[q] === 0) missing.push(featNames[i]);
+                });
+                if (missing.length > 0) {
+                    await showCustomAlert(`กรุณาให้คะแนนฟีเจอร์ดังต่อไปนี้ก่อน:\n- ${missing.join('\n- ')}`, 'ตอบไม่ครบข้อ', 'warning');
+                    return;
+                }
+            }
+
+            // Validate step 5 core transition answers
+            if (currentStep === 5) {
+                const coreQs = ['q1', 'q3', 'q4', 'q5', 'q7'];
+                let missing = [];
+                coreQs.forEach((q) => {
+                    if (answers[q] === 0) {
+                        const num = q.replace('q', '');
+                        missing.push(num);
+                    }
+                });
+                if (missing.length > 0) {
+                    await showCustomAlert(`กรุณาประเมินผลคำถามหลักข้อที่ ${missing.join(', ')} ในส่วนนี้ให้ครบถ้วนก่อนดำเนินต่อ`, 'ตอบไม่ครบข้อ', 'warning');
+                    return;
+                }
+            }
+
+            currentStep = step;
+            updateWizardUI();
+        }
+
+        function prevStep(step) {
+            currentStep = step;
+            updateWizardUI();
+        }
+
+        // Theme Toggle Handler
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeBtnText = document.getElementById('themeBtnText');
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (html.classList.contains('light-theme')) {
+                html.classList.remove('light-theme');
+                themeBtnText.innerText = "โหมดสว่าง";
+                themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.classList.add('light-theme');
+                themeBtnText.innerText = "โหมดมืด";
+                themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Apply saved theme on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.documentElement.classList.add('light-theme');
+                document.getElementById('themeBtnText').innerText = "โหมดมืด";
+                document.getElementById('themeIcon').innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+            }
+            updateWizardUI();
+        });
+
+        async function saveAndGoToResults() {
+            // Re-validate everything just in case
+            for (let q in answers) {
+                if (answers[q] === 0) {
+                    await showCustomAlert('กรุณากรอกข้อมูลและตอบแบบประเมินให้ครบถ้วนในทุกขั้นตอน', 'ตอบไม่ครบข้อ', 'warning');
+                    return;
+                }
+            }
+
+            // Calculations out of 70 Max Points:
+            // Teams usage freq (qTeamsPostUsage) = 5
+            // Device channels freq (Web, Desktop, Mobile) = 3 * 5 = 15
+            // Teams subfeatures (Chat11, Group, Channel, Cal, Files) = 5 * 5 = 25
+            // Transition quality (q1, q3, q4, q5, q7) = 5 * 5 = 25
+            // Total = 5 + 15 + 25 + 25 = 70
+            const total = answers.qTeamsPostUsage + answers.qDeviceWeb + answers.qDeviceDesktop + answers.qDeviceMobile +
+                          answers.qFeatChat11 + answers.qFeatGroupChat + answers.qFeatChannelPost + answers.qFeatCalendar + answers.qFeatFiles +
+                          answers.q1 + answers.q3 + answers.q4 + answers.q5 + answers.q7;
+            const maxScore = 70;
+            const percentage = Math.round((total / maxScore) * 100);
+
+            const name = document.getElementById('empName').value.trim() || 'ไม่ระบุชื่อ';
+            const dept = document.getElementById('empDept').value || 'ไม่ระบุฝ่าย/สำนัก';
+            const note1 = document.getElementById('notesCompare').value.trim() || 'ไม่มีบันทึกความคิดเห็นเชิงเปรียบเทียบ';
+            const note2 = document.getElementById('notesBarrier').value.trim() || 'ไม่มีบันทึกสิ่งที่ต้องการให้ช่วยเหลือ';
+
+
+
+            // Selected Radio options for email status & login pain
+            const cloudMailStatus = document.querySelector('input[name="cloudMail"]:checked').value;
+            const loginPainStatus = document.querySelector('input[name="loginPain"]:checked').value;
+
+            // Selected Pain points of LINE
+            const selectedLinePains = [];
+            document.querySelectorAll('input[name="linePain"]:checked').forEach(cb => {
+                selectedLinePains.push(cb.value);
+            });
+            const linePainStr = selectedLinePains.length > 0 ? selectedLinePains.join(', ') : 'ไม่พบปัญหาที่ระบุชัดเจน';
+
+            // Selected Pain points of Teams
+            const selectedTeamsPains = [];
+            document.querySelectorAll('input[name="teamsPain"]:checked').forEach(cb => {
+                selectedTeamsPains.push(cb.value);
+            });
+            const teamsPainStr = selectedTeamsPains.length > 0 ? selectedTeamsPains.join(', ') : 'ไม่พบปัญหาที่ระบุชัดเจน';
+
+            const teamsExp = document.querySelector('input[name="teamsExp"]:checked').value;
+
+            document.getElementById('resName').innerText = name;
+            document.getElementById('resDept').innerText = dept;
+            
+            const scoreText = document.getElementById('scoreText');
+            const scoreSubtext = document.getElementById('scoreSubtext');
+            const circle = document.getElementById('scoreCircle');
+            const badge = document.getElementById('groupBadge');
+            const recTitle = document.getElementById('recTitle');
+            const recText = document.getElementById('recText');
+
+            scoreText.innerText = `${percentage}%`;
+            scoreSubtext.innerText = `${total} / ${maxScore} คะแนน`;
+            
+            // Set SVG Circle stroke-dashoffset dynamically
+            const radius = 40;
+            const circumference = 2 * Math.PI * radius; // 251.2
+            const offset = circumference - (percentage / 100) * circumference;
+            circle.style.strokeDashoffset = offset;
+
+            badge.className = 'badge';
+            let status = '';
+            let recTitleStr = '';
+            let recTextStr = '';
+
+            if (percentage >= 80) {
+                badge.className = 'badge badge-champion';
+                badge.innerText = 'Champions';
+                status = 'Champions (ระดับผู้นำการเปลี่ยนแปลง)';
+                recTitleStr = 'ระดับผู้นำการเปลี่ยนแปลง (Champions)';
+                recTextStr = 'พนักงานมีความถี่และทักษะการเปลี่ยนมาใช้ Teams สูงมากในทุกฟีเจอร์ แนะนำให้เสนอแต่งตั้งเป็น "Teams Change Agent" คอยให้คำแนะนำช่วยเหลือผู้ใช้รายอื่นในแผนก';
+            } else if (percentage >= 60) {
+                badge.className = 'badge badge-active';
+                badge.innerText = 'Active Users';
+                status = 'Active Users (กลุ่มใช้งานต่อเนื่อง)';
+                recTitleStr = 'กลุ่มใช้งานต่อเนื่อง (Active Users)';
+                recTextStr = 'พนักงานใช้งานคุ้นเคยดีเป็นหลักในการคุยงานประจำวัน ควรแนะนำต่อในเรื่องของการใช้ Post/Reply Thread เพื่อจัดระบบแชทกลุ่มใหญ่ให้ไม่สับสนเหมือน LINE';
+            } else if (percentage >= 40) {
+                badge.className = 'badge badge-hesitant';
+                badge.innerText = 'Hesitant Users';
+                status = 'Hesitant Users (กลุ่มเริ่มทดลอง)';
+                recTitleStr = 'กลุ่มลังเล / เริ่มทดลองใช้ (Hesitant)';
+                recTextStr = 'เริ่มทดลองใช้แต่ยังมีความถี่ต่ำและยังพึ่งพา LINE ในการสั่งส่งงาน แนะนำให้ทีมผู้ประเมินสนับสนุนข้อมูลคู่มือสอนใช้งานฟีเจอร์ที่ยังมีปัญหาการใช้งาน';
+            } else {
+                badge.className = 'badge badge-resistant';
+                badge.innerText = 'Resistant';
+                status = 'Resistant (กลุ่มแรงต้านสูง / ขาดทักษะด่วน)';
+                recTitleStr = 'ต้องการการช่วยเหลือส่วนบุคคลด่วน (Resistant)';
+                recTextStr = 'อัตราการเข้าใช้และทักษะ Teams ต่ำมากในเกือบทุกฟีเจอร์ และยังพบอุปสรรคการเข้าใช้งานสูง แนะนำไอที/แอดมินจัด On-site Clinic ไปเคลียร์ปัญหา (เช่น แก้รหัสผ่าน/ลงแอปมือถือ) โดยเร็ว';
+            }
+
+            // Build dynamic analysis points based on individual survey answers
+            const analysisPoints = [];
+            const plainAnalysisPoints = [];
+
+            // 1. Check Login / MFA barriers
+            if (loginPainStatus.includes("พบปัญหาบ่อยมาก") || selectedTeamsPains.some(p => p.includes("เข้าสู่ระบบยาก") || p.includes("ติด MFA"))) {
+                analysisPoints.push("🔑 <b>ปัญหาด้านระบบการเข้าใช้งาน (Login/MFA):</b> มีอุปสรรคการล็อกอินบ่อยครั้งหรือติดขัดระบบความปลอดภัย MFA แนะนำให้ฝ่ายไอทีติดต่อช่วยเหลือแก้ไขสิทธิ์หรือรีเซ็ตรหัสผ่านโดยด่วน");
+                plainAnalysisPoints.push("- ปัญหาการเข้าใช้งาน (Login/MFA): พบอุปสรรคบ่อยครั้ง แนะนำฝ่ายไอทีติดต่อช่วยเหลือแก้ไขโดยด่วน");
+            }
+
+            // 2. Check Device usage (Mobile setup notification)
+            if (answers.qDeviceMobile <= 2 && answers.qTeamsPostUsage >= 3) {
+                analysisPoints.push("📱 <b>การใช้บนโทรศัพท์มือถืออยู่ในระดับต่ำ:</b> การใช้งานผ่านแอปโทรศัพท์ค่อนข้างน้อย ส่งผลให้ไม่ได้รับการแจ้งเตือนงานเร่งด่วนเมื่ออยู่นอกหน้าจอคอม แนะนำให้สนับสนุนการติดตั้งแอปและเปิดรับแจ้งเตือนแบบพุช");
+                plainAnalysisPoints.push("- อุปกรณ์มือถือ: อัตราการใช้ต่ำ แนะนำให้ช่วยลงแอปและตั้งค่าระบบแจ้งเตือนแบบพุชเพิ่มเติม");
+            }
+
+            // 3. Check Channel Post / Reply Thread (Proficiency)
+            if (answers.q3 <= 2 || answers.qFeatChannelPost <= 2) {
+                analysisPoints.push("💬 <b>ทักษะการตอบข้อความรายเรื่อง (Channel Threads):</b> ยังไม่คุ้นเคยหรือสับสนกับการตอบกลับแบบแยกหัวข้อ (Reply Thread) แนะนำสอนเสริมเทคนิคนี้เป็นพิเศษเพื่อลดการพิมพ์ข้อความปนกันสับสนในแชทหลัก");
+                plainAnalysisPoints.push("- ทักษะการแชท (Channel Thread): ยังสับสนกับการตอบแบบแยกเรื่อง แนะนำฝึกอบรมเสริมเรื่องการโพสต์/ตอบกลับแบบ Reply Thread");
+            }
+
+            // 4. Check Co-authoring
+            if (answers.q4 <= 2 || answers.qFeatFiles <= 2) {
+                analysisPoints.push("📄 <b>การร่วมมือแก้ไขเอกสารออนไลน์ (Co-authoring):</b> ยังขาดการแชร์และแก้ไขไฟล์ร่วมกันแบบเรียลไทม์ ควรแนะนำวิธีอัปโหลดและเปิดแก้ไขเอกสารพร้อมกันผ่านแอป Teams เพื่อหลีกเลี่ยงการดาวน์โหลดไฟล์ลงเครื่องคอมพิวเตอร์");
+                plainAnalysisPoints.push("- การแชร์เอกสาร (Co-authoring): ยังขาดการแก้ไขไฟล์ร่วมกัน แนะนำสอนวิธีกรอกเอกสารออนไลน์พร้อมกันในแผนก");
+            }
+
+            // 5. Check Security share permission (q7)
+            if (answers.q7 <= 2) {
+                analysisPoints.push("🛡️ <b>ความปลอดภัยการแชร์ลิงก์ข้อมูล (Link Sharing Security):</b> คะแนนด้านการตั้งค่าตรวจสอบสิทธิ์ลิงก์ก่อนส่งงานค่อนข้างต่ำ ควรเน้นย้ำและสอนวิธีกำหนดสิทธิ์การเข้าถึงไฟล์เอกสารราชการเพื่อป้องกันข้อมูลรั่วไหลสู่ภายนอก");
+                plainAnalysisPoints.push("- ความปลอดภัย (Sharing Security): ระดับการระบุสิทธิ์ลิงก์ต่ำ ควรแนะนำการตั้งค่าจำกัดสิทธิ์ผู้รับไฟล์เอกสารราชการ");
+            }
+
+            // 6. Check Teams performance issue
+            if (selectedTeamsPains.some(p => p.includes("หน่วงเครื่อง") || p.includes("กินทรัพยากร"))) {
+                analysisPoints.push("🌀 <b>ปัญหาประสิทธิภาพตัวแอป (App Lag):</b> พบปัญหาแอปหน่วงเครื่อง/กินสเปกสูง แนะนำแนะนำให้เปิดใช้ผ่าน Web Browser (Edge/Chrome) หรือเคลียร์แคชของแอป Teams เพื่อให้ทำงานลื่นไหลขึ้น");
+                plainAnalysisPoints.push("- ปัญหาประสิทธิภาพแอป (App Lag): แอปหน่วงเครื่อง แนะนำเสนอทางเลือกใช้งานเวอร์ชัน Web Browser หรือเคลียร์แคชแอป");
+            }
+
+            if (analysisPoints.length === 0) {
+                analysisPoints.push("✅ <b>ภาพรวมการใช้งานสมบูรณ์ดี:</b> ไม่พบปัญหาข้อติดขัดหลักทั้งด้านระบบ ความปลอดภัย หรือทักษะการใช้เครื่องมือย่อยในระบบ Teams");
+                plainAnalysisPoints.push("- ภาพรวมสมบูรณ์ดี: ไม่พบประเด็นปัญหาข้อติดขัดหลักที่ต้องปรับปรุง");
+            }
+
+            // Display on screen (with HTML formatting)
+            recText.innerHTML = `<b>แนวทางการช่วยเหลือเบื้องต้น:</b><br>${recTextStr}<br><br><b>🔍 ผลวิเคราะห์เชิงลึกรายหัวข้อ (จุดที่ควรปรับปรุง):</b><br><ul style="text-align: left; padding-left: 1.2rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">` + 
+                                 analysisPoints.map(p => `<li style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;">${p}</li>`).join('') + 
+                                 `</ul>`;
+
+            recTitle.innerText = recTitleStr;
+
+            const analysisReportStr = plainAnalysisPoints.join('\n');
+
+            const reportStr = `[รายงานผลการประเมินการเปลี่ยนย้ายการทำงาน LINE → Microsoft Teams]
+ข้อมูลพนักงาน:
+- ชื่อ-นามสกุล: ${name}
+- สำนัก/ฝ่าย: ${dept}
+- สิทธิ์การใช้งานอีเมลองค์กร: ${cloudMailStatus}
+
+พฤติกรรมเดิมและการใช้งาน LINE:
+- ระดับการใช้ LINE ทำงานก่อนหน้านี้: ${answers.qLineUsage} / 5
+- ปัญหาที่พบใน LINE: ${linePainStr}
+- ประสบการณ์ใช้งาน Teams ก่อนอบรม: ${teamsExp}
+
+พฤติกรรมการใช้งาน Teams หลังอบรม (Teams Transition):
+- ความถี่เปิดใช้ Teams ภาพรวม: ${answers.qTeamsPostUsage} / 5
+- ความถี่ใช้งานแยกตามอุปกรณ์ (Web/Desktop/Mobile): Web ${answers.qDeviceWeb}/5, Desktop ${answers.qDeviceDesktop}/5, Mobile ${answers.qDeviceMobile}/5
+- สถานะปัญหาการ Login ระบบ: ${loginPainStatus}
+- ปัญหาที่พบในการใช้งาน Microsoft Teams: ${teamsPainStr}
+
+ระดับความถี่การใช้งานแต่ละฟีเจอร์ย่อย (จากคะแนนเต็ม 5):
+- Chat 1-1 (คุยส่วนตัว): ${answers.qFeatChat11}
+- Group Chat (คุยกลุ่มย่อย): ${answers.qFeatGroupChat}
+- Post/Reply ใน Channel (คุยแยกหัวข้อ): ${answers.qFeatChannelPost}
+- Calendar (นัดหมาย/ดูประชุม): ${answers.qFeatCalendar}
+- OneDrive/Files (คลังแชร์ไฟล์): ${answers.qFeatFiles}
+
+ทักษะการใช้และการเปลี่ยนย้ายงาน (Transition Quality):
+- การสลับงานจาก LINE มา Teams: ${answers.q1} / 5
+- ทักษะการจัดการ Channel/Thread: ${answers.q3} / 5
+- อัตราการใช้ Co-authoring: ${answers.q4} / 5
+- ทัศนคติความตระหนักเรื่องความปลอดภัย: ${answers.q5} / 5
+- การกำหนดสิทธิ์ลิงก์ก่อนแชร์ไฟล์งาน: ${answers.q7} / 5
+
+----------------------------------------
+สรุปคะแนนประเมินโดยรวม: ${total} / ${maxScore} คะแนน (${percentage}%)
+ระดับผลการปรับตัวของพนักงาน: ${status}
+
+🔍 ผลวิเคราะห์จุดอ่อนและข้อเสนอแนะรายหัวข้อ:
+${analysisReportStr}
+
+ความคิดเห็นเชิงเปรียบเทียบ (LINE vs Teams):
+"${note1}"
+
+สิ่งที่อยากให้ช่วยเหลือสนับสนุนเพิ่มเติม:
+"${note2}"`;
+
+            document.getElementById('rawSummary').value = reportStr;
+
+            // Send data to Google Sheets via Google Apps Script (Free)
+            const googleSheetsUrl = "https://script.google.com/macros/s/AKfycbx_zluFI60jIChBim6EnfoxGB9rJElaTkFM4vffq6VcxL2bI48LrvuGlFbdNYWphxTxGQ/exec";
+            
+            if (googleSheetsUrl && googleSheetsUrl !== "วาง_URL_ของ_Google_Apps_Script_ตรงนี้") {
+                const payload = {
+                    name: name,
+                    dept: dept,
+                    emailStatus: cloudMailStatus,
+                    qLineUsage: answers.qLineUsage,
+                    linePain: linePainStr,
+                    teamsExp: teamsExp,
+                    qTeamsPostUsage: answers.qTeamsPostUsage,
+                    qDeviceWeb: answers.qDeviceWeb,
+                    qDeviceDesktop: answers.qDeviceDesktop,
+                    qDeviceMobile: answers.qDeviceMobile,
+                    loginPain: loginPainStatus,
+                    teamsPain: teamsPainStr,
+                    qFeatChat11: answers.qFeatChat11,
+                    qFeatGroupChat: answers.qFeatGroupChat,
+                    qFeatChannelPost: answers.qFeatChannelPost,
+                    qFeatCalendar: answers.qFeatCalendar,
+                    qFeatFiles: answers.qFeatFiles,
+                    q1: answers.q1,
+                    q3: answers.q3,
+                    q4: answers.q4,
+                    q5: answers.q5,
+                    q7: answers.q7,
+                    totalScore: total,
+                    percentage: percentage,
+                    evaluationStatus: status,
+                    noteCompare: note1,
+                    noteBarrier: note2
+                };
+
+                fetch(googleSheetsUrl, {
+                    method: "POST",
+                    mode: "no-cors", // Prevent CORS issues on redirects
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                })
+                .then(() => {
+                    console.log("Logged response to Google Sheets successfully.");
+                })
+                .catch(error => console.error("Error logging response to Google Sheets:", error));
+            }
+
+            document.getElementById('formView').classList.remove('active');
+            document.getElementById('resultView').classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goToForm() {
+            document.getElementById('resultView').classList.remove('active');
+            document.getElementById('formView').classList.add('active');
+            currentStep = 6;
+            updateWizardUI();
+        }
+
+        function copyReport() {
+            const rawSummaryText = document.getElementById('rawSummary');
+            rawSummaryText.select();
+            rawSummaryText.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(rawSummaryText.value).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            });
+        }
+
+        async function resetForm() {
+            const confirmed = await showCustomConfirm('คุณต้องการล้างข้อมูลทั้งหมดเพื่อประเมินรายบุคคลท่านถัดไปใช่หรือไม่?', 'ยืนยันการเริ่มใหม่', 'danger', 'เริ่มใหม่', 'ยกเลิก');
+            if (confirmed) {
+                document.getElementById('empName').value = '';
+                document.getElementById('empDept').selectedIndex = 0;
+                document.getElementById('notesCompare').value = '';
+                document.getElementById('notesBarrier').value = '';
+                
+                document.querySelectorAll('input[name="linePain"]').forEach(cb => cb.checked = false);
+                document.querySelectorAll('input[name="teamsPain"]').forEach(cb => cb.checked = false);
+                
+                const cloudMailRadios = document.querySelectorAll('input[name="cloudMail"]');
+                if (cloudMailRadios.length > 0) cloudMailRadios[0].checked = true;
+
+                const loginPainRadios = document.querySelectorAll('input[name="loginPain"]');
+                if (loginPainRadios.length > 0) loginPainRadios[0].checked = true;
+
+                const teamsExpRadios = document.querySelectorAll('input[name="teamsExp"]');
+                if (teamsExpRadios.length > 0) teamsExpRadios[0].checked = true;
+
+                document.querySelectorAll('.score-btn').forEach(btn => btn.classList.remove('selected'));
+                for (let q in answers) {
+                    answers[q] = 0;
+                }
+                
+                currentStep = 1;
+                document.getElementById('resultView').classList.remove('active');
+                document.getElementById('formView').classList.add('active');
+                updateWizardUI();
+            }
+        }
+    </script>
+</body>
+</html>
