@@ -803,6 +803,10 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                 <span>หน้าแรก</span>
             </button>
+            <button class="theme-toggle-btn" onclick="showInterviewerGuide()" id="guideBtn" style="border-color: rgba(0, 162, 232, 0.4); color: var(--accent-primary); background: rgba(0, 162, 232, 0.05);" title="💡 คู่มือการชวนคุยและไกด์เวลาสัมภาษณ์">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <span>คู่มือการคุย</span>
+            </button>
             <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">
                 <svg id="themeIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 <span id="themeBtnText">โหมดสว่าง</span>
@@ -1608,7 +1612,60 @@
 
     <div class="toast" id="toast">คัดลอกข้อมูลสรุปไปยัง Clipboard แล้ว!</div>
 
+    <!-- Interviewer Guide Modal -->
+    <div class="modal-overlay" id="customGuideModal">
+        <div class="modal-box" style="max-width: 600px; text-align: left;">
+            <div class="modal-icon" style="background: rgba(0, 162, 232, 0.15); color: var(--accent-primary);">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            </div>
+            <div class="modal-title" style="text-align: center; margin-bottom: 1rem;">💡 คู่มือการชวนคุยสัมภาษณ์กลุ่ม (1 ชั่วโมง)</div>
+            <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; display: flex; flex-direction: column; gap: 1rem; max-height: 400px; overflow-y: auto; padding-right: 0.5rem; margin-bottom: 1.5rem;">
+                <div>
+                    <strong style="color: var(--accent-primary); display: block;">⏱️ เฟส 1: เริ่มต้นแนะนำตัว (นาทีที่ 0 - 10)</strong>
+                    <span>ชี้แจงเป้าหมาย: เพื่อปรับปรุงการทำงานร่วมกันผ่าน Teams และหาปัญหาข้อติดขัดด่วนสำหรับการช่วยเหลือด้านไอที</span>
+                </div>
+                <div>
+                    <strong style="color: var(--accent-primary); display: block;">⏱️ เฟส 2: การสื่อสารและการใช้งานฟีเจอร์ย่อย (นาทีที่ 10 - 25)</strong>
+                    <span>ให้ทีมเล่าปัญหาในการส่งข้อมูล แชทกลุ่ม หรือการสับสนกับการใช้งาน Calendar/Meetings เปรียบเทียบกับ LINE</span>
+                </div>
+                <div>
+                    <strong style="color: var(--accent-primary); display: block;">⏱️ เฟส 3: โครงสร้างและเวิร์กโฟลว์ของสำนัก (นาทีที่ 25 - 45)</strong>
+                    <ul style="padding-left: 1.25rem; margin-top: 0.25rem;">
+                        <li><strong>การตั้ง Channels:</strong> ในแผนกมีกติกาการตั้งหรือจัดหมวดห้องคุยอย่างไร? คุยแยกเรื่องกันไหม?</li>
+                        <li><strong>LINE Dependency:</strong> เจาะลึกอุปสรรคสำคัญที่ทำให้ต้องคุยใน LINE เช่น ติดต่อนอกหน่วยงานเป็นหลัก หรือพฤติกรรมการพิมพ์สติกเกอร์ตอบรับ</li>
+                    </ul>
+                </div>
+                <div>
+                    <strong style="color: var(--accent-primary); display: block;">⏱️ เฟส 4: ระดมข้อเสนอแนะและสิ่งสนับสนุนด่วน (นาทีที่ 45 - 60)</strong>
+                    <span>ถามผู้ตอบตรงๆ ว่าอยากให้จัดอบรมเพิ่มหัวข้อใด หรืออยากให้แก้ไขระบบการเข้าถึง/อินเทอร์เน็ตหน้างานจุดใดมากที่สุด</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-confirm" onclick="closeInterviewerGuide()" style="flex: none; width: 100px; margin: 0 auto;">รับทราบ</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Guide Modal Actions
+        function showInterviewerGuide() {
+            document.getElementById('customGuideModal').classList.add('show');
+        }
+        function closeInterviewerGuide() {
+            document.getElementById('customGuideModal').classList.remove('show');
+        }
+
+        // Generic Toast helper
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.style.background = isSuccess ? 'var(--success)' : 'var(--danger)';
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
         // Custom Dialog Modal Functions
         function showCustomAlert(message, title = "แจ้งเตือน", type = "warning") {
             return new Promise((resolve) => {
@@ -2156,8 +2213,12 @@ ${analysisReportStr}
                 })
                 .then(() => {
                     console.log("Logged response to Google Sheets successfully.");
+                    showToast("🟢 บันทึกข้อมูลเข้า Google Sheets สำเร็จแล้ว!", true);
                 })
-                .catch(error => console.error("Error logging response to Google Sheets:", error));
+                .catch(error => {
+                    console.error("Error logging response to Google Sheets:", error);
+                    showToast("🔴 เชื่อมต่อ Google Sheets ล้มเหลว (คัดลอกรายงานเก็บแทน)", false);
+                });
             }
 
             document.getElementById('formView').classList.remove('active');
@@ -2178,11 +2239,7 @@ ${analysisReportStr}
             rawSummaryText.setSelectionRange(0, 99999);
             
             navigator.clipboard.writeText(rawSummaryText.value).then(() => {
-                const toast = document.getElementById('toast');
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 2000);
+                showToast("📋 คัดลอกข้อมูลสรุปไปยัง Clipboard แล้ว!", true);
             });
         }
 
