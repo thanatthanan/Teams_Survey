@@ -792,6 +792,107 @@
         .modal-btn-danger:hover {
             background: #dc2626;
         }
+        /* Mobile Responsiveness Improvements */
+        .toast {
+            max-width: 90% !important;
+            width: max-content !important;
+            text-align: center !important;
+            font-size: 0.9rem !important;
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            line-height: 1.4 !important;
+            padding: 0.85rem 1.5rem !important;
+            box-sizing: border-box !important;
+        }
+
+        @media (max-width: 576px) {
+            /* Container & Panel spacing */
+            .container {
+                padding: 1rem 0.5rem !important;
+            }
+            .panel {
+                padding: 1.25rem !important;
+                border-radius: 16px !important;
+            }
+
+            /* Header font sizes */
+            header h1 {
+                font-size: 1.5rem !important;
+            }
+            header p {
+                font-size: 0.85rem !important;
+            }
+
+            /* Top Bar Navigation Buttons */
+            .top-bar {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 0.5rem !important;
+                width: 100% !important;
+                margin-bottom: 0.75rem !important;
+            }
+            .top-bar #homeBtn {
+                grid-column: 1 / -1 !important;
+            }
+            .top-bar button {
+                padding: 0.5rem 0.75rem !important;
+                font-size: 0.8rem !important;
+                justify-content: center !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            /* Question Cards Padding */
+            .question-card {
+                padding: 1rem !important;
+                border-radius: 12px !important;
+            }
+            .question-text {
+                font-size: 0.9rem !important;
+            }
+
+            /* Wizard Buttons spacing */
+            .wizard-actions.double {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 0.5rem !important;
+            }
+            .btn {
+                padding: 0.65rem 0.75rem !important;
+                font-size: 0.85rem !important;
+            }
+
+            /* Result Screen Grid */
+            .btn-group {
+                grid-template-columns: 1fr !important;
+                gap: 0.75rem !important;
+            }
+            .btn-group button {
+                width: 100% !important;
+            }
+
+            /* Dialog Modals responsive sizing */
+            .modal-box {
+                padding: 1.5rem 1.25rem !important;
+                width: 95% !important;
+                border-radius: 16px !important;
+            }
+            .modal-title {
+                font-size: 1.1rem !important;
+            }
+            .modal-message {
+                font-size: 0.85rem !important;
+            }
+
+            /* Custom inputs/radios sizing for thumb typing */
+            .radio-item, .checkbox-item {
+                padding: 0.65rem 0.75rem !important;
+                font-size: 0.85rem !important;
+            }
+            .score-btn {
+                padding: 0.6rem 0.2rem !important;
+                font-size: 0.95rem !important;
+            }
+        }
     </style>
 </head>
 <body>
