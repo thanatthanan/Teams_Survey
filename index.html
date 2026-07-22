@@ -1848,14 +1848,6 @@
         }
 
         function prevStep(step) {
-            // Validate step 6 department workflow answers
-            if (currentStep === 6) {
-                if (answers.qDeptReadiness === 0 || answers.qDeptLeaderSupport === 0) {
-                    await showCustomAlert('กรุณาเลือกประเมินระดับความพร้อมของแผนกและบทบาทผู้นำในข้อ 5.5 และ 5.6', 'ตอบไม่ครบข้อ', 'warning');
-                    return;
-                }
-            }
-
             currentStep = step;
             updateWizardUI();
         }
