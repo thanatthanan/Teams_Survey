@@ -1338,9 +1338,175 @@
                 </div>
             </div>
 
-            <!-- STEP 6: Open ended notes & Weekly Stats -->
+            <!-- STEP 6: Department Structure & Workflow Mapping -->
             <div class="form-step-container" id="step6">
-                <h2 class="section-title">5. สถิติการใช้งาน & ความคิดเห็นเชิงลึก</h2>
+                <h2 class="section-title">5. การจัดโครงสร้างและการไหลของงานภายในสำนัก/ฝ่าย</h2>
+                
+                <div class="form-group" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 15px; margin-bottom: 1.25rem;">
+                    <label style="color: var(--text-primary); font-size: 0.95rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">5.1 โครงสร้างกลุ่มงานหรือการตั้งทีมย่อยใน Microsoft Teams ของสำนักท่าน</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="deptTeamsStruct" value="มีการตั้งกลุ่มแยกตามกลุ่มงานย่อยชัดเจน (เช่น กลุ่มงาน A, กลุ่มงาน B)" checked>
+                            <span>มีการตั้งกลุ่มแยกตามกลุ่มงานย่อยชัดเจน</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="deptTeamsStruct" value="มีการตั้งกลุ่มแยกตามรายโครงการหรือรายประเด็นสั้นๆ">
+                            <span>มีการตั้งกลุ่มแยกตามรายโครงการหรือรายประเด็นสั้นๆ</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="deptTeamsStruct" value="ยังไม่มีการแยกทีมย่อย มีเพียงห้องรวม (General) ห้องเดียวคุยทุกเรื่อง">
+                            <span>ไม่มีการแยกทีมย่อย มีเพียงห้องรวม (General) ห้องเดียว</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="deptTeamsStruct" value="ยังไม่ได้ตั้งทีมหรือกลุ่มงานหลักใน Teams เลย">
+                            <span>ยังไม่ได้ตั้งทีมหรือกลุ่มงานหลักใน Teams เลย</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 15px; margin-bottom: 1.25rem;">
+                    <label style="color: var(--text-primary); font-size: 0.95rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">5.2 ข้อตกลงร่วมกันหรือกติกาในการใช้งานร่วมกันของคนในแผนก</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="deptAgreement" value="มีกติกาหรือข้อตกลงร่วมกันชัดเจน (เช่น เวลาตอบงาน รูปแบบไฟล์)" checked>
+                            <span>มีกติกาหรือข้อตกลงร่วมกันชัดเจน</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="deptAgreement" value="มีข้อตกลงคร่าวๆ แต่ไม่ได้เขียนเป็นกติกาทางการ">
+                            <span>มีข้อตกลงคร่าวๆ แต่ไม่ได้ตั้งเป็นกติกาทางการ</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="deptAgreement" value="ไม่มีกติกาหรือข้อตกลงร่วมกัน ต่างคนต่างตอบตามสะดวก">
+                            <span>ไม่มีกติกาหรือข้อตกลงร่วมกัน ต่างคนต่างตอบตามสะดวก</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 15px; margin-bottom: 1.25rem;">
+                    <label style="color: var(--text-primary); font-size: 0.95rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">5.3 การไหลของงานหลัก (Core Workflows) - ในการทำงานจริงท่านประสานงานผ่านช่องทางใด?</label>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 0.75rem;">
+                        <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+                            <span style="font-size: 0.88rem; font-weight: bold; color: var(--accent-primary);">A) การแจ้งข่าวสาร/ประสานงานเรื่องเร่งด่วนในแผนก</span>
+                            <div class="radio-group" style="flex-direction: row; gap: 0.5rem; margin-top: 0.25rem;">
+                                <label class="radio-item" style="padding: 0.5rem 0.75rem; font-size: 0.85rem; flex: 1;">
+                                    <input type="radio" name="flowUrgent" value="ใช้ LINE 100%" checked> LINE 100%
+                                </label>
+                                <label class="radio-item" style="padding: 0.5rem 0.75rem; font-size: 0.85rem; flex: 1;">
+                                    <input type="radio" name="flowUrgent" value="ใช้ผสมกันสองระบบ"> ใช้ทั้งคู่คู่ขนาน
+                                </label>
+                                <label class="radio-item" style="padding: 0.5rem 0.75rem; font-size: 0.85rem; flex: 1;">
+                                    <input type="radio" name="flowUrgent" value="ใช้ Teams 100%"> Teams 100%
+                                </label>
+                            </div>
+                        </div>
+
+                        <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+                            <span style="font-size: 0.88rem; font-weight: bold; color: var(--accent-primary);">B) การส่งมอบไฟล์เอกสารราชการเพื่อขออนุมัติภายในสำนัก</span>
+                            <div class="radio-group" style="flex-direction: row; gap: 0.5rem; margin-top: 0.25rem;">
+                                <label class="radio-item" style="padding: 0.5rem 0.75rem; font-size: 0.85rem; flex: 1;">
+                                    <input type="radio" name="flowDoc" value="ใช้ LINE 100%" checked> LINE 100%
+                                </label>
+                                <label class="radio-item" style="padding: 0.5rem 0.75rem; font-size: 0.85rem; flex: 1;">
+                                    <input type="radio" name="flowDoc" value="ใช้ผสมกันสองระบบ"> ใช้ทั้งคู่คู่ขนาน
+                                </label>
+                                <label class="radio-item" style="padding: 0.5rem 0.75rem; font-size: 0.85rem; flex: 1;">
+                                    <input type="radio" name="flowDoc" value="ใช้ Teams 100%"> Teams 100%
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span style="font-size: 0.88rem; font-weight: bold; color: var(--accent-primary);">C) การประสานงานกับผู้ติดต่อนอกหน่วยงาน (ภายนอก NCSA)</span>
+                            <div class="radio-group" style="flex-direction: row; gap: 0.5rem; margin-top: 0.25rem;">
+                                <label class="radio-item" style="padding: 0.5rem 0.75rem; font-size: 0.85rem; flex: 1;">
+                                    <input type="radio" name="flowExternal" value="ใช้ LINE 100%" checked> LINE 100%
+                                </label>
+                                <label class="radio-item" style="padding: 0.5rem 0.75rem; font-size: 0.85rem; flex: 1;">
+                                    <input type="radio" name="flowExternal" value="ใช้ผสมกันสองระบบ"> ใช้ทั้งคู่คู่ขนาน
+                                </label>
+                                <label class="radio-item" style="padding: 0.5rem 0.75rem; font-size: 0.85rem; flex: 1;">
+                                    <input type="radio" name="flowExternal" value="ใช้ Teams 100%"> Teams 100%
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 15px; margin-bottom: 1.25rem;">
+                    <label style="color: var(--text-primary); font-size: 0.95rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">5.4 ปัจจัยที่ทำให้แผนกของท่านยังจำเป็นต้องพึ่งพาแอป LINE ในการทำงานย่อย (เลือกได้หลายข้อ)</label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="lineDependency" value="หน่วยงานภายนอก/พันธมิตรยังสะดวกติดต่อทาง LINE เป็นหลัก">
+                            <span>หน่วยงานภายนอก/บุคคลภายนอกยังใช้ LINE เป็นช่องทางหลัก</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="lineDependency" value="ระบบแจ้งเตือนของ LINE รวดเร็ว ทันใจ และคนเปิดดูบ่อยกว่า">
+                            <span>ระบบแจ้งเตือนของ LINE รวดเร็ว ทันใจ และคนเปิดดูบ่อยกว่า</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="lineDependency" value="มีความสะดวกในการพิมพ์คุยสั้นๆ ส่งรูปด่วน หรือสติกเกอร์โต้ตอบ">
+                            <span>มีความสะดวกในการพิมพ์คุยสั้นๆ ส่งรูปด่วน หรือสติกเกอร์โต้ตอบ</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="lineDependency" value="ความรู้สึกว่าเครื่องมือของ Teams ซับซ้อนและเป็นทางการเกินความต้องการ">
+                            <span>ความรู้สึกว่าเครื่องมือของ Teams ซับซ้อนและเป็นทางการเกินความต้องการ</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">5.5 ความพร้อมด้านกายภาพของแผนก</div>
+                        <div class="question-text">ความพร้อมของเครื่องคอมพิวเตอร์ อุปกรณ์ และระบบอินเทอร์เน็ตในการทำงานผ่าน Teams ของสำนักท่าน?</div>
+                    </div>
+                    <div class="score-options" data-question="qDeptReadiness">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>ติดขัดมาก เครื่องหน่วง</span>
+                        <span>พร้อมและอินเทอร์เน็ตลื่นดี</span>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-meta">5.6 บทบาทของผู้นำ/หัวหน้างาน</div>
+                        <div class="question-text">ผู้บริหารหรือผู้นำระดับสำนัก/กลุ่มงาน มีการสนับสนุนและเป็นแบบอย่างในการเปลี่ยนย้ายมาใช้ Teams มากน้อยเพียงใด?</div>
+                    </div>
+                    <div class="score-options" data-question="qDeptLeaderSupport">
+                        <div class="score-btn" data-value="1">1</div>
+                        <div class="score-btn" data-value="2">2</div>
+                        <div class="score-btn" data-value="3">3</div>
+                        <div class="score-btn" data-value="4">4</div>
+                        <div class="score-btn" data-value="5">5</div>
+                    </div>
+                    <div class="score-labels">
+                        <span>ไม่เคยใช้เป็นแบบอย่าง</span>
+                        <span>สนับสนุนและสั่งงานผ่าน Teams เสมอ</span>
+                    </div>
+                </div>
+
+                <div class="wizard-actions double">
+                    <button class="btn btn-secondary" onclick="prevStep(6)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        ย้อนกลับ
+                    </button>
+                    <button class="btn" onclick="nextStep(7)">
+                        ถัดไป 
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 7: Open ended notes & Weekly Stats -->
+            <div class="form-step-container" id="step7">
+            <div class="form-step-container" id="step6">
+                <h2 class="section-title">6. ความคิดเห็นเชิงลึกและส่งประเมิน</h2>
                 
 
 
@@ -1355,7 +1521,7 @@
                 </div>
 
                 <div class="wizard-actions double">
-                    <button class="btn btn-secondary" onclick="prevStep(5)">
+                    <button class="btn btn-secondary" onclick="prevStep(6)">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                         ย้อนกลับ
                     </button>
@@ -1542,7 +1708,7 @@
         }
 
         let currentStep = 1;
-        const totalSteps = 6;
+        const totalSteps = 7;
 
         // Store answers
         const answers = {
@@ -1562,7 +1728,10 @@
             q3: 0,
             q4: 0,
             q5: 0,
-            q7: 0
+            q7: 0,
+            // Department focus group additions
+            qDeptReadiness: 0,
+            qDeptLeaderSupport: 0
         };
 
         const stepTitles = {
@@ -1571,7 +1740,8 @@
             3: "การเข้าใช้งาน Teams และปัญหาที่พบบ่อย",
             4: "แบบสำรวจระดับการใช้งานฟีเจอร์ย่อย",
             5: "ประเมินการปรับใช้และสลับเครื่องมือ",
-            6: "ความคิดเห็นเชิงลึกและส่งประเมิน"
+            6: "โครงสร้างและการไหลของงานในแผนก",
+            7: "ความคิดเห็นเชิงลึกและส่งประเมิน"
         };
 
         // Set up interactive buttons
@@ -1665,11 +1835,27 @@
                 }
             }
 
+            // Validate step 6 department workflow answers
+            if (currentStep === 6) {
+                if (answers.qDeptReadiness === 0 || answers.qDeptLeaderSupport === 0) {
+                    await showCustomAlert('กรุณาเลือกประเมินระดับความพร้อมของแผนกและบทบาทผู้นำในข้อ 5.5 และ 5.6', 'ตอบไม่ครบข้อ', 'warning');
+                    return;
+                }
+            }
+
             currentStep = step;
             updateWizardUI();
         }
 
         function prevStep(step) {
+            // Validate step 6 department workflow answers
+            if (currentStep === 6) {
+                if (answers.qDeptReadiness === 0 || answers.qDeptLeaderSupport === 0) {
+                    await showCustomAlert('กรุณาเลือกประเมินระดับความพร้อมของแผนกและบทบาทผู้นำในข้อ 5.5 และ 5.6', 'ตอบไม่ครบข้อ', 'warning');
+                    return;
+                }
+            }
+
             currentStep = step;
             updateWizardUI();
         }
@@ -1736,6 +1922,20 @@
             // Selected Radio options for email status & login pain
             const cloudMailStatus = document.querySelector('input[name="cloudMail"]:checked').value;
             const loginPainStatus = document.querySelector('input[name="loginPain"]:checked').value;
+
+            // Selected Radio options for step 6 (department workflow & organization)
+            const deptTeamsStruct = document.querySelector('input[name="deptTeamsStruct"]:checked').value;
+            const deptAgreement = document.querySelector('input[name="deptAgreement"]:checked').value;
+            const flowUrgent = document.querySelector('input[name="flowUrgent"]:checked').value;
+            const flowDoc = document.querySelector('input[name="flowDoc"]:checked').value;
+            const flowExternal = document.querySelector('input[name="flowExternal"]:checked').value;
+
+            // Selected LINE dependencies of step 6
+            const selectedLineDeps = [];
+            document.querySelectorAll('input[name="lineDependency"]:checked').forEach(cb => {
+                selectedLineDeps.push(cb.value);
+            });
+            const lineDependencyStr = selectedLineDeps.length > 0 ? selectedLineDeps.join(', ') : 'ไม่ระบุปัจจัยความจำเป็นชัดเจน';
 
             // Selected Pain points of LINE
             const selectedLinePains = [];
@@ -1889,6 +2089,17 @@
 - ทัศนคติความตระหนักเรื่องความปลอดภัย: ${answers.q5} / 5
 - การกำหนดสิทธิ์ลิงก์ก่อนแชร์ไฟล์งาน: ${answers.q7} / 5
 
+ข้อมูลโครงสร้างและการไหลของงานในสำนัก/ฝ่าย (Focus Group Analysis):
+- การจัดโครงสร้างทีมใน Teams: ${deptTeamsStruct}
+- ข้อตกลง/กติกาการใช้งานร่วมกัน: ${deptAgreement}
+- การไหลของงานหลัก:
+  * การแจ้งข้อมูลเร่งด่วน: ${flowUrgent}
+  * การส่งไฟล์เอกสารขออนุมัติ: ${flowDoc}
+  * การประสานงานภายนอก (นอก NCSA): ${flowExternal}
+- ปัจจัยความจำเป็นที่ยังต้องใช้ LINE: ${lineDependencyStr}
+- ระดับความพร้อมด้านกายภาพของแผนก: ${answers.qDeptReadiness} / 5
+- การสนับสนุนของผู้บริหาร/หัวหน้ากลุ่มงาน: ${answers.qDeptLeaderSupport} / 5
+
 ----------------------------------------
 สรุปคะแนนประเมินโดยรวม: ${total} / ${maxScore} คะแนน (${percentage}%)
 ระดับผลการปรับตัวของพนักงาน: ${status}
@@ -1932,6 +2143,15 @@ ${analysisReportStr}
                     q4: answers.q4,
                     q5: answers.q5,
                     q7: answers.q7,
+                    // New Focus Group Fields
+                    deptTeamsStruct: deptTeamsStruct,
+                    deptAgreement: deptAgreement,
+                    flowUrgent: flowUrgent,
+                    flowDoc: flowDoc,
+                    flowExternal: flowExternal,
+                    lineDependency: lineDependencyStr,
+                    qDeptReadiness: answers.qDeptReadiness,
+                    qDeptLeaderSupport: answers.qDeptLeaderSupport,
                     totalScore: total,
                     percentage: percentage,
                     evaluationStatus: status,
@@ -1957,7 +2177,7 @@ ${analysisReportStr}
         function goToForm() {
             document.getElementById('resultView').classList.remove('active');
             document.getElementById('formView').classList.add('active');
-            currentStep = 6;
+            currentStep = 7;
             updateWizardUI();
         }
 
@@ -1986,6 +2206,7 @@ ${analysisReportStr}
                 
                 document.querySelectorAll('input[name="linePain"]').forEach(cb => cb.checked = false);
                 document.querySelectorAll('input[name="teamsPain"]').forEach(cb => cb.checked = false);
+                document.querySelectorAll('input[name="lineDependency"]').forEach(cb => cb.checked = false);
                 
                 const cloudMailRadios = document.querySelectorAll('input[name="cloudMail"]');
                 if (cloudMailRadios.length > 0) cloudMailRadios[0].checked = true;
@@ -1995,6 +2216,21 @@ ${analysisReportStr}
 
                 const teamsExpRadios = document.querySelectorAll('input[name="teamsExp"]');
                 if (teamsExpRadios.length > 0) teamsExpRadios[0].checked = true;
+
+                const deptTeamsStructRadios = document.querySelectorAll('input[name="deptTeamsStruct"]');
+                if (deptTeamsStructRadios.length > 0) deptTeamsStructRadios[0].checked = true;
+
+                const deptAgreementRadios = document.querySelectorAll('input[name="deptAgreement"]');
+                if (deptAgreementRadios.length > 0) deptAgreementRadios[0].checked = true;
+
+                const flowUrgentRadios = document.querySelectorAll('input[name="flowUrgent"]');
+                if (flowUrgentRadios.length > 0) flowUrgentRadios[0].checked = true;
+
+                const flowDocRadios = document.querySelectorAll('input[name="flowDoc"]');
+                if (flowDocRadios.length > 0) flowDocRadios[0].checked = true;
+
+                const flowExternalRadios = document.querySelectorAll('input[name="flowExternal"]');
+                if (flowExternalRadios.length > 0) flowExternalRadios[0].checked = true;
 
                 document.querySelectorAll('.score-btn').forEach(btn => btn.classList.remove('selected'));
                 for (let q in answers) {
